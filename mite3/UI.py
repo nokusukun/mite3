@@ -35,6 +35,7 @@ class UI():
             self.UI = UI
             UI.elements[id] = {}
 
+
         def prop(self, prop):
             id_ = "".join([ str(random.randint(0, 9)) for x in range(0, 16) ])
             script = "getcallback('{id_}',$('#{id}').prop(`{prop}`));".format(id=self.id, prop=prop, id_=id_)
@@ -45,6 +46,7 @@ class UI():
                 pass
 
             return self.UI.mite.callback_result[id_]
+
 
         def attr(self, attr, value=None):
             # generates a callbackID

@@ -9,7 +9,7 @@ class Materialize():
 		I only created this for testing purposes.
 	"""
 
-	def __init__(self, mite):
+	def __init__(self, mite): 
 		self.mite = mite
 
 	def toast(self, message, timeout=1000):
