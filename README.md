@@ -1,6 +1,6 @@
 # mite3
 ---
-An event based chromeium UI library using on CEF Python
+An event based python UI library using CEFPython
 
 *and asyncio, but I'm bad at that. But it works. Please don't look at the code.*
 
