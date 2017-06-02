@@ -1,0 +1,27 @@
+[lang]English
+[page]008.jpg
+<map name="map">
+    	<area data-text="Don't you think you're trying a little too hard?" 
+	shape="poly" coords="49, 546, 150, 547, 163, 572, 172, 739, 159, 783, 120, 815, 54, 801, 35, 758, 35, 565" />
+    
+	<area data-text="What's the deal with that industrial mask you've got on?!"
+	shape="poly" coords="278, 544, 296, 560, 305, 670, 288, 699, 258, 733, 201, 744, 172, 710, 165, 569, 165, 563, 183, 548" />
+    
+	<area data-text="You're the one to talk."
+	shape="poly" coords="302, 559, 323, 543, 358, 540, 378, 567, 373, 654, 354, 681, 326, 684, 308, 636" />
+    
+	<area data-text="You've gone soft, huh, all might?"
+	shape="poly" coords="478, 661, 518, 746, 513, 803, 483, 839, 435, 855, 411, 838, 412, 672, 449, 641" />
+
+    	<area data-text="It took well over 30 seconds after I sent the Noumu for you to arrive here..."
+	shape="poly" coords="533, 541, 639, 540, 651, 559, 650, 706, 626, 734, 577, 747, 520, 736, 483, 651, 499, 565" />
+    
+	<area data-text="The bar isn't more than 5 kilometers away from here."
+	shape="poly" coords="659, 562, 681, 537, 734, 536, 760, 558, 758, 688, 736, 729, 671, 733, 661, 709" />
+
+    	<area data-text="Even All Might!"
+	shape="poly" coords="264, 327, 300, 292, 336, 293, 350, 319, 347, 480, 326, 499, 285, 505, 265, 477" />
+
+    	<area data-text="Ahhh!!!"
+	shape="poly" coords="637, 88, 667, 66, 699, 63, 707, 78, 702, 188, 659, 205, 640, 167" />
+</map>

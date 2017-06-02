@@ -1,0 +1,7 @@
+{
+	"title": "Boku no Hero Academia",
+	"chapter": 11,
+	"pages": "280",
+	"format": "jpg",
+	"select": "{page:0>3}.{format}"
+}

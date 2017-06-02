@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MiteMite Demo!</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+
+        #btn-prev {
+            position: fixed; left: 1%; bottom: 21px;
+        }
+
+        #zoom-fab {
+            padding-bottom: 60px;
+        }
+
+        #navhead {
+            height: 50px;
+        }
+
+        #navwrap {
+            margin-top: -1em;
+        }
+
+        .view-hole {
+            position:fixed; /*it can be fixed too*/
+            left:0; right:0;
+            top:0; bottom:0;
+            margin-top: 40px;
+            z-index: 1;
+
+            /*this to solve "the content will not be cut when the window is smaller than the content": */
+            max-width:100%;
+            max-height:100%;
+            overflow:auto;
+        }
+
+        .view-hole::-webkit-scrollbar-track
+        {
+          background-color: transparent;
+        }
+
+        .view-hole::-webkit-scrollbar
+        {
+          width: 10px;
+          background-color: transparent;
+        }
+
+        .view-hole::-webkit-scrollbar-thumb
+        {
+          background-color: #FFFFFF;  
+        }
+
+        body{
+            background-color: #AAF;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="popup" class="modal">
+        <div class="modal-content">
+          <h4 id="popup-header">{{ modal-header }}</h4>
+          <p id="popup-content">{{ modal-content }}</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+
+    <nav id="navhead" class="grey">
+        <div id="navwrap" class="nav-wrapper">
+          <a id="header" href="#!" class="" style="margin-left: .5em;">Mite Viewer</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a id="btn-nav-libr" href="#">Library</a></li>
+            <li><a id="btn-nav-open" href="#">Open</a></li>
+            <li><a id="btn-nav-sett" href="#">Settings</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a id="btn-nav-libr" href="#">Library</a></li>
+            <li><a id="btn-nav-open" href="#">Open</a></li>
+            <li><a id="btn-nav-sett" href="#">Settings</a></li>
+          </ul>
+        </div>
+    </nav>
+    
+    <div id="map-container"></div>
+
+    <div id="view-hole" class="view-hole" tabindex='1'>
+        <div id="viewport" class="container"  style="margin-top: 1em">
+            <div id="top" class="card section scrollspy">
+                <img id="page-view" class="responsive center-align" src="data/001.jpg" style="width: 100%">
+                <p id="page-pos-container" class="range-field"></p>
+
+            </div>
+            <div id="end"></div>
+        </div>        
+    </div>
+
+    <div id="zoom-fab" class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating btn-large red">
+          <i class="material-icons">search</i>
+        </a>
+        <ul>
+          <li><a id="btn-zoom-in" class="btn-floating yellow darken-1" ><i class="material-icons">zoom_in</i></a></li>
+          <li><a id="btn-zoom-out" class="btn-floating yellow darken-1"><i class="material-icons">zoom_out</i></a></li>
+        </ul>
+      </div>
+
+    <div class="fixed-action-btn">
+    <button id="btn-next" href="#top" class="js-trigger btn-floating waves-effect waves-light blue" data-mt-duration="300">
+        <i class="material-icons">skip_next</i>
+    </button>
+    </div> 
+    <div class="fixed-action-btn">
+    <button id="btn-prev" class="btn-floating waves-effect waves-light blue left">
+        <i class="material-icons">skip_previous</i>
+    </button>
+    </div> 
+
+    
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script type="text/javascript">
+        </script>
+    <script src="src/resp_imgmap.js"></script>
+    <script src="src/hotkeys.js"></script>
+    <script src="src/mitemite.js"></script>
+</body>
+</html>
