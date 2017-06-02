@@ -3,7 +3,6 @@ from decorator import decorator
 from mite3.Map import Map
 import time
 import sys
-import win32gui
 import time
 import inspect
 import asyncio
@@ -12,7 +11,13 @@ import enum
 import random
 import os
 
+try:
+    import win32gui
+except:
+    print("Mite did not find win32gui. Setting the window size won't work.")
+
 # Patched Javascript Bindings to allow uninitalized classes to be used as a function
+# change line 63
 class PatchedBinder(cef.JavascriptBindings):
 
     def SetProperty(self, name, value):
@@ -146,20 +151,25 @@ class Mite():
 
 
     def run(self, **settings):
+        # TODO: Rewrite this so that it looks like it makes sense as well.
         self.pbug("init0")
 
+        # Initalize CEF
         cef_settings = settings["cef_settings"] if "cef_settings" in settings else {}
         cef.Initialize(settings=cef_settings)
+
+
         if "url" in settings:
             url = settings["url"]
         else:
             raise ValueError("URL is not defined")
-
         title = settings["title"] if "title" in settings else "Mite3 App"
 
+        # You can override the eventloop with someone else's 
+        #       Warning: Your event loop might get raped.
         self.event_loop = settings["event_loop"] if "event_loop" in settings else self.event_loop
 
-        # browser initalization
+        # Browser initalization
         window = cef.WindowInfo()
         if "window" in settings:
             window.windowRect = settings["window"]
@@ -189,7 +199,14 @@ class Mite():
         self.start()
         self.close()
         
-
+    def resizeWindow(self, left, top, right, bottom):
+        # TODO: Rerwite this. It currently looks like some undergrad who's in his
+        #   sixth year in univerity wrote it. Oh wait, that's me.
+        try:
+            handle = self.browser.GetWindowHandle()
+            win32gui.MoveWindow(handle, left, top, right, bottom, True)
+        except:
+            pass
 
 
     def start(self):
@@ -292,11 +309,6 @@ class Mite():
         self.pbug("Executing > {0}".format(script))
         script = "try {{ {0} }} catch(e) {{ miteErrorCallback(String(e), e, 'execute', '', '');}}".format(script)
         return self.browser.ExecuteJavascript(script)
-
-
-    def resizeWindow(self, left, top, right, bottom):
-        handle = self.browser.GetWindowHandle()
-        win32gui.MoveWindow(handle, left, top, right, bottom, True)
 
 
 

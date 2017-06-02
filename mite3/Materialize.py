@@ -2,7 +2,12 @@ from mite3.Query import Query
 from mite3.Map import Map
 from mite3.ElementBuilder import ElementBuilder
 
+
 class Materialize():
+	"""
+		Will change this.
+		I only created this for testing purposes.
+	"""
 
 	def __init__(self, mite):
 		self.mite = mite
