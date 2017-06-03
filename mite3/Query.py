@@ -1,8 +1,10 @@
 from mite3.ElementBuilder import ElementBuilder as Element
 
 class Query():
+    query_cache = {}
+    cache_proved = {}
 
-    def __init__(self, identifier=None):
+    def __init__(self, identifier=None, recache=False):
         self.function = ""
         self._name = ""
 
@@ -16,6 +18,19 @@ class Query():
             self._query = "$()"
         else:
             self._query = "$('{0}')".format(identifier)
+
+        # cache_proved makes sure that the cache has already been declared
+        if not identifier in Query.cache_proved or recache:
+            # Generate ID as a variable name for the cache
+            # PS. this is the fastest way to do it.
+            # see: https://stackoverflow.com/questions/2484156/is-str-replace-replace-ad-nauseam-a-standard-idiom-in-python
+            unique = "cache{}".format(identifier).replace("#", "_id").replace(".", "_class").replace("-", "_").replace(" ", "")
+            Query.query_cache[identifier] = unique
+            self._query = "{unique} = {selector};{unique}".format(unique=unique, selector=self._query)
+        else:
+            self._query = Query.cache_proved[identifier]
+            
+
 
     def magic_smoke(self, *args):
         if len(args) > 0:
@@ -60,6 +75,20 @@ class Query():
 
     def execute(self, mite):
         mite.xj(self._query+";")
+        self._prove()
+
+    def _prove(self):
+        proved = {}
+        identifiers = []
+        identifiers.extend(Query.query_cache.keys())
+        for identifier in identifiers:
+            if identifier in self._query:
+                proved[identifier] = Query.query_cache.pop(identifier)
+
+        # Moving a cache to proved marks it as active and reuseable. 
+        Query.cache_proved.update(proved)
+
+
 
     def __str__(self):
         return self._query
