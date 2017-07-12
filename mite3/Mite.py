@@ -327,7 +327,30 @@ class Mite():
         script = "try {{ {0} }} catch(e) {{ miteErrorCallback(String(e), e, 'execute', '', '');}}".format(script)
         return self.browser.ExecuteJavascript(script)
 
+    #TODO01 -- evaluate later
+    def eventGenerator(self, name, event):
+        def eventFunc(fargs = None):
+            self.pbug("Event {} called. Args: {}".format(name, fargs))
+            if name == "getcallback":
+                threading.Thread(target=self.function, args=fargs).start()
+            else:
+                asyncio.run_coroutine_threadsafe(event, self.event_loop)
+        
+        return eventFunc
+            
+        #if self.function.__name__ == "getcallback":
+        #    threading.Thread(target=self.function, args=fargs).start()
+        #    self.mite.pbug("Special Event {} ended".format(
+        #        self.function.__name__))
+        #else:
+        #    coro = getattr(self.mite, self.function.__name__)(*fargs)
+        #    event = asyncio.run_coroutine_threadsafe(
+        #        coro, self.mite.event_loop)
+        #    threading.Thread(target=event.result).start()
+        #    self.mite.pbug("Event {} ended".format(self.function.__name__))
 
+            
+            
     def _bindJS(self):
         """
             _bindJS    = Internal function to bind the app functions to
@@ -342,6 +365,9 @@ class Mite():
             event = type("Event_{}".format(funcs["name"]), (Event,), {})
             event.function = funcs["function"]
             event.mite = self
+            
+            #TODO01 -- evaluate later
+            #event = self.eventGenerator(funcs["name"], funcs["function"])
 
             self.pbug("Binding {0} to {1}".format(
                 funcs["name"], funcs["function"]))
