@@ -13,3 +13,7 @@ Huh, I swear I expected more.
 
 ### How to
 	Look at example.py
+
+
+### Todo
+	* Rewrite The event class into a Function Factory instead of creating classes for each Event
